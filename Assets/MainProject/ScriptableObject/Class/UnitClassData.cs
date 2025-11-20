@@ -13,10 +13,7 @@ public class UnitClassData : ScriptableObject
     }
     public unitClass unitclass;
 
-    public int Power;
     public int Mana;
     public int Health;
     public float Speed;
-    public int AttakRange;
-    public int AttackSpeed;
 }
