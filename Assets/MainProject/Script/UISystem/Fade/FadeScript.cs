@@ -8,14 +8,20 @@ public class FadeScript : MonoBehaviour
     float time = 0;
     float F_time = 1f;
 
-    public void Fade()
+    public void FadeOut()
     {
-        StartCoroutine(FadeOut());
+        StartCoroutine(Fadeout());
     }
 
-    IEnumerator FadeOut()
+    public void FadeIn()
+    {
+        StartCoroutine(Fadein());
+    }
+
+    IEnumerator Fadeout()
     {
         Panel.gameObject.SetActive(true);
+        time = 0;
         Color alpha = Panel.color;
 
         while (alpha.a < 1f)
@@ -25,7 +31,24 @@ public class FadeScript : MonoBehaviour
             Panel.color = alpha;
             yield return null;
         }
+        time = 0;
+        yield return null;
+    }
 
+    IEnumerator Fadein()
+    {
+        Color alpha = Panel.color;
+        time = 0;
+
+        while (alpha.a > 0f)
+        {
+            time += Time.deltaTime / F_time;
+            alpha.a = Mathf.Lerp(1, 0, time);
+            Panel.color = alpha;
+            yield return null;
+        }
+        Panel.gameObject.SetActive(false);
+        time = 0;
         yield return null;
     }
 }
